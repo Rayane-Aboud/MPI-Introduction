@@ -19,6 +19,7 @@ int main(int argc,char* argv[]){
         for(int j=0;j<SIZE;j++){
             A[i][j]=2*i;
             B[i][j]=i*i;
+            C[i][j]=0;
         }
         C_row[i]=0;
     }
@@ -29,7 +30,7 @@ int main(int argc,char* argv[]){
         }
     }
 
-    MPI_Scatter(C_row,SIZE,MPI_INT,&C[rank],SIZE,MPI_INT,0,MPI_COMM_WORLD);
+    MPI_Gather(C_row,SIZE,MPI_INT,&C[rank],SIZE,MPI_INT,0,MPI_COMM_WORLD);
 
     if(rank==0){
         printf("[");
